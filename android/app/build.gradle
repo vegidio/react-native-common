@@ -1,5 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "com.facebook.react"
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
 import com.android.build.OutputFile
 
@@ -93,9 +94,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.reactnativecommon"
+    namespace "io.vinicius.rncommon"
     defaultConfig {
-        applicationId "com.reactnativecommon"
+        applicationId "io.vinicius.rncommon"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

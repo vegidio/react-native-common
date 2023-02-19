@@ -1,13 +1,18 @@
-/**
- * @format
- */
-
 import 'react-native-gesture-handler';
 import React, { FC } from 'react';
+import { Provider as PaperProvider } from 'react-native-paper';
 import { AppNavigator } from '@src/components';
+import { DarkTheme, isDarkTheme, LightTheme } from '@src/utils';
 
 const App: FC = () => {
-    return <AppNavigator />;
+    let theme = isDarkTheme ? DarkTheme : LightTheme;
+
+    return (
+        // Required to pass the themes to all components
+        <PaperProvider theme={theme}>
+            <AppNavigator theme={theme} />
+        </PaperProvider>
+    );
 };
 
 export default App;

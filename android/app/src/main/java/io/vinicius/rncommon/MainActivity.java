@@ -1,4 +1,4 @@
-package com.reactnativecommon;
+package io.vinicius.rncommon;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
