@@ -1,13 +1,6 @@
 import React, { FC } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import AuthLoginForm from './AuthLoginForm';
 
 export const AuthScreen: FC = () => {
-    return <SafeAreaView style={styles.safeArea} />;
+    return <AuthLoginForm />;
 };
-
-const styles = StyleSheet.create({
-    safeArea: {
-        backgroundColor: 'red',
-        flex: 1,
-    },
-});
