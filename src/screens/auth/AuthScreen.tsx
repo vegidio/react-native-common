@@ -1,9 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { useSelector } from 'react-redux';
-import { Text } from 'react-native-paper';
+import { Divider } from 'react-native-paper';
 import { selectToken } from '@src/store/slices/authSlice';
 import AuthLoginForm from './AuthLoginForm';
+import AuthTokenInfo from './AuthTokenInfo';
 
 export const AuthScreen = () => {
     const token = useSelector(selectToken);
@@ -11,7 +12,13 @@ export const AuthScreen = () => {
     return (
         <View>
             <AuthLoginForm />
-            <Text>{JSON.stringify(token)}</Text>
+
+            {token && (
+                <>
+                    <Divider />
+                    <AuthTokenInfo token={token} />
+                </>
+            )}
         </View>
     );
 };
