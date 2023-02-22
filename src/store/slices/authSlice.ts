@@ -2,9 +2,9 @@ import { createSlice } from '@reduxjs/toolkit';
 import { Token } from '@src/models';
 import { apiSlice } from '@src/store/api';
 
-export type AuthState = {
+export interface AuthState {
     token?: Token;
-};
+}
 
 const initialState: AuthState = {};
 

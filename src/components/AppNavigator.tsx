@@ -8,9 +8,9 @@ const Stack = createStackNavigator();
 
 export enum Router {
     Home = 'Home',
-    Auth = 'Auth',
-    User = 'User',
-    CountryByCode = 'CountryByCode',
+    Auth = 'Authentication',
+    User = 'Me',
+    CountryByCode = 'Country By Code',
     Countries = 'Countries',
 }
 

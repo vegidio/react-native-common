@@ -1,13 +1,10 @@
 import React, { FC } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { View } from 'react-native';
+import { useMeQuery } from '@src/store/api';
+import UserInfo from './UserInfo';
 
 export const UserScreen: FC = () => {
-    return <SafeAreaView style={styles.safeArea} />;
-};
+    const { data: user } = useMeQuery();
 
-const styles = StyleSheet.create({
-    safeArea: {
-        backgroundColor: 'purple',
-        flex: 1,
-    },
-});
+    return <View>{user && <UserInfo user={user} />}</View>;
+};

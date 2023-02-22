@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
-import { Button, Card, Text } from 'react-native-paper';
+import { Button, Card } from 'react-native-paper';
 import { logout } from '@src/store/slices';
 import { Token } from '@src/models';
+import { CardRow } from '@src/components';
 
 interface AuthTokenInfoProps {
     token: Token;
@@ -28,22 +29,6 @@ const AuthTokenInfo: FC<AuthTokenInfoProps> = ({ token }) => {
     );
 };
 
-interface CardRowProps {
-    title: string;
-    value: string;
-}
-
-const CardRow: FC<CardRowProps> = ({ title, value }) => {
-    return (
-        <View style={styles.cardRow}>
-            <Text style={styles.titleText}>{title}</Text>
-            <Text numberOfLines={3} ellipsizeMode="middle" style={styles.tokenText}>
-                {value}
-            </Text>
-        </View>
-    );
-};
-
 const styles = StyleSheet.create({
     card: {
         margin: 16,
@@ -55,16 +40,6 @@ const styles = StyleSheet.create({
         marginTop: 8,
         marginRight: 8,
         marginBottom: 4,
-    },
-    cardRow: {
-        flexDirection: 'row',
-        gap: 8,
-    },
-    titleText: {
-        fontWeight: 'bold',
-    },
-    tokenText: {
-        flexShrink: 1,
     },
 });
 
