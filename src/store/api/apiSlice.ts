@@ -1,10 +1,20 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import { AuthState } from '@src/store/slices';
 import { Country, Response, SignInRequestDto, Token } from '@src/models';
 
 export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: 'https://countries.vinicius.io/api/',
         timeout: 5000,
+        prepareHeaders: (headers, { getState }) => {
+            const token = (getState() as { auth: AuthState }).auth.token;
+
+            if (token?.accessToken) {
+                headers.set('Authorization', `Bearer ${token.accessToken}`);
+            }
+
+            return headers;
+        },
     }),
     endpoints: (builder) => ({
         signIn: builder.mutation<Token, SignInRequestDto>({
