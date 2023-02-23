@@ -1,6 +1,6 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { Token } from '@src/models';
-import { authApi } from '@src/api';
+import { api, authApi } from '@src/api';
 
 export interface AuthState {
     token?: Token;
@@ -24,6 +24,12 @@ const authSlice = createSlice({
 });
 
 export default authSlice;
+
+// Thunks
+export const logoutAndClearCache = createAsyncThunk('logoutAndClearCache', async (_, { dispatch }) => {
+    dispatch(authSlice.actions.logout());
+    dispatch(api.util.resetApiState());
+});
 
 // Selectors
 export const selectToken = (state: { auth: AuthState }) => state.auth.token;

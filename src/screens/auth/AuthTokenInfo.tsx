@@ -1,8 +1,7 @@
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
-import { useDispatch } from 'react-redux';
 import { Button, Card } from 'react-native-paper';
-import { logout } from '@src/store';
+import { logoutAndClearCache, store } from '@src/store';
 import { Token } from '@src/models';
 import { CardRow } from '@src/components';
 
@@ -11,8 +10,6 @@ interface AuthTokenInfoProps {
 }
 
 const AuthTokenInfo: FC<AuthTokenInfoProps> = ({ token }) => {
-    const dispatch = useDispatch();
-
     return (
         <Card style={styles.card}>
             <Card.Title title="Tokens" />
@@ -21,7 +18,7 @@ const AuthTokenInfo: FC<AuthTokenInfoProps> = ({ token }) => {
                 <CardRow title="Refresh:" value={token.refreshToken} />
             </Card.Content>
             <Card.Actions style={styles.cardActions}>
-                <Button mode="contained" onPress={() => dispatch(logout())}>
+                <Button mode="contained" onPress={() => store.dispatch(logoutAndClearCache())}>
                     Logout
                 </Button>
             </Card.Actions>
