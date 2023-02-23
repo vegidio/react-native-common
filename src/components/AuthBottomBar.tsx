@@ -4,8 +4,8 @@ import { SafeAreaView, StyleSheet } from 'react-native';
 import { Appbar, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
+import { selectToken } from '@src/store';
 import { Router } from '@src/components';
-import { selectToken } from '@src/store/slices';
 
 export const AuthBottomBar = () => {
     const navigation = useNavigation<StackNavigationProp<any>>();

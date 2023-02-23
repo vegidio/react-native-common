@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-paper';
-import { useSignInMutation } from '@src/store/api';
+import { useSignInMutation } from '@src/api';
 import { EmailInput, PasswordInput } from '@src/components';
 
 const AuthLoginForm = () => {

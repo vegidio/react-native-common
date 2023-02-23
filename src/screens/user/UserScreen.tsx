@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { useMeQuery } from '@src/store/api';
+import { useMeQuery } from '@src/api';
 import UserInfo from './UserInfo';
 
 export const UserScreen: FC = () => {

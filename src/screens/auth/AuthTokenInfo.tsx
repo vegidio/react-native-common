@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { useDispatch } from 'react-redux';
 import { Button, Card } from 'react-native-paper';
-import { logout } from '@src/store/slices';
+import { logout } from '@src/store';
 import { Token } from '@src/models';
 import { CardRow } from '@src/components';
 
