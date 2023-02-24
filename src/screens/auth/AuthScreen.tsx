@@ -1,13 +1,12 @@
 import React from 'react';
 import { View } from 'react-native';
-import { useSelector } from 'react-redux';
 import { Divider } from 'react-native-paper';
-import { selectToken } from '@src/store';
 import AuthLoginForm from './AuthLoginForm';
 import AuthTokenInfo from './AuthTokenInfo';
+import { useAuthStore } from '@src/stores';
 
 export const AuthScreen = () => {
-    const token = useSelector(selectToken);
+    const token = useAuthStore(state => state.token);
 
     return (
         <View>

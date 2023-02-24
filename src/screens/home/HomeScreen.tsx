@@ -20,8 +20,8 @@ export const HomeScreen: FC = () => {
         <FlatList<MenuOption>
             data={menuOptions}
             ItemSeparatorComponent={Divider}
-            keyExtractor={(option) => option.destination}
-            renderItem={(list) => <HomeMenuRow navigation={navigation} menuOption={list.item} />}
+            keyExtractor={option => option.destination}
+            renderItem={list => <HomeMenuRow navigation={navigation} menuOption={list.item} />}
         />
     );
 };

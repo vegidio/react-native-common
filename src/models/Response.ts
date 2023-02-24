@@ -1,3 +1,3 @@
-export class Response<T> {
-    constructor(readonly data: T) {}
+export interface Response<T> {
+    data: T;
 }

@@ -1,15 +1,14 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { Appbar, Button } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { selectToken } from '@src/store';
 import { Router } from '@src/components';
+import { useAuthStore } from '@src/stores';
 
 export const AuthBottomBar = () => {
     const navigation = useNavigation<StackNavigationProp<any>>();
-    const token = useSelector(selectToken);
+    const token = useAuthStore(state => state.token);
 
     return (
         <SafeAreaView>

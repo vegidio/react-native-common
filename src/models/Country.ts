@@ -1,35 +1,41 @@
-export class Country {
-    constructor(
-        readonly code: string,
-        readonly name: Name,
-        readonly region: string,
-        readonly languages: Language[],
-        readonly currencies: Currency[],
-        readonly population: number,
-        readonly area: number,
-        readonly coordinates: number[],
-        readonly flags: Flag,
-        readonly capital?: string,
-        readonly subRegion?: string,
-    ) {}
+export interface Country {
+    code: string;
+    name: Name;
+    capital?: string;
+    region: string;
+    subRegion?: string;
+    languages: Language[];
+    currencies: Currency[];
+    population: number;
+    area: number;
+    coordinates: number[];
+    flags: Flag;
 }
 
-class Name {
-    constructor(readonly common: string, readonly official: string, readonly nativeName: NativeName[]) {}
+interface Name {
+    common: string;
+    official: string;
+    nativeName: NativeName[];
 }
 
-class NativeName {
-    constructor(readonly language: string, readonly common: string, readonly official: string) {}
+interface NativeName {
+    language: string;
+    common: string;
+    official: string;
 }
 
-class Language {
-    constructor(readonly code: string, readonly name: string) {}
+interface Language {
+    code: string;
+    name: string;
 }
 
-class Currency {
-    constructor(readonly code: string, readonly name: string, readonly symbol?: string) {}
+interface Currency {
+    code: string;
+    name: string;
+    symbol?: string;
 }
 
-class Flag {
-    constructor(readonly png: string, readonly svg: string) {}
+interface Flag {
+    png: string;
+    svg: string;
 }

@@ -1,3 +1,6 @@
-export class User {
-    constructor(readonly id: number, readonly name: string, readonly username: string, readonly email: string) {}
+export interface User {
+    id: number;
+    name: string;
+    username: string;
+    email: string;
 }

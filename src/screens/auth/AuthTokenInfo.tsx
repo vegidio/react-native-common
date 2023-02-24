@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-paper';
-import { logoutAndClearCache, store } from '@src/store';
 import { Token } from '@src/models';
 import { CardRow } from '@src/components';
+import { useAuthStore } from '@src/stores';
 
-interface AuthTokenInfoProps {
+interface Props {
     token: Token;
 }
 
-const AuthTokenInfo: FC<AuthTokenInfoProps> = ({ token }) => {
+const AuthTokenInfo: FC<Props> = ({ token }) => {
+    const logout = useAuthStore(state => state.logout);
+
     return (
         <Card style={styles.card}>
             <Card.Title title="Tokens" />
@@ -18,7 +20,7 @@ const AuthTokenInfo: FC<AuthTokenInfoProps> = ({ token }) => {
                 <CardRow title="Refresh:" value={token.refreshToken} />
             </Card.Content>
             <Card.Actions style={styles.cardActions}>
-                <Button mode="contained" onPress={() => store.dispatch(logoutAndClearCache())}>
+                <Button mode="contained" onPress={() => logout()}>
                     Logout
                 </Button>
             </Card.Actions>

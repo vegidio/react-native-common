@@ -1,3 +1,4 @@
-export class Token {
-    constructor(readonly accessToken: string, readonly refreshToken: string) {}
+export interface Token {
+    accessToken: string;
+    refreshToken: string;
 }
