@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { View } from 'react-native';
-import { useFetchMe } from '@src/services/countries.rest';
+import { useFetchMe } from '@src/services/countries.graphql';
 import UserInfo from './UserInfo';
 
 export const UserScreen: FC = () => {

@@ -4,7 +4,7 @@ import { Divider } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Country } from '@src/models';
-import { useFetchCountries } from '@src/services/countries.rest';
+import { useFetchCountries } from '@src/services/countries.graphql';
 import { CountryRow } from './CountryRow';
 
 export const CountriesScreen: FC = () => {

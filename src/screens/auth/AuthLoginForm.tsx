@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-paper';
 import { EmailInput, PasswordInput } from '@src/components';
-import { useLogin } from '@src/services/countries.rest';
+import { useLogin } from '@src/services/countries.graphql';
 
 const AuthLoginForm = () => {
     const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const AuthLoginForm = () => {
                 <Button
                     mode="contained"
                     disabled={email.length === 0 || password.length === 0}
-                    onPress={() => trigger({ email, password })}>
+                    onPress={() => trigger({ dto: { email, password } } as any)}>
                     Login
                 </Button>
             </Card.Actions>

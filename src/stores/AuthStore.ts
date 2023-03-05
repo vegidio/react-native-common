@@ -1,8 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
-import { mutate } from 'swr';
 import { Token } from '@src/models';
-import { config } from '@src/services/fetchers';
+import { clearCache, config } from '@src/services/fetchers';
 
 interface AuthStore {
     token?: Token;
@@ -19,8 +18,8 @@ export const useAuthStore = create(
         },
 
         logout() {
-            delete config.headers.Authorization; // Remove the Authorization header
-            mutate(() => true, undefined, { revalidate: false }); // Clear the cache
+            delete config.headers.Authorization;
+            clearCache();
 
             set(state => {
                 state.token = undefined;
