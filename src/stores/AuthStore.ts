@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { Token } from '@src/models';
-import { client } from '@src/services/fetchers';
+import { client } from 'rn-sak';
 
 interface AuthStore {
     token?: Token;

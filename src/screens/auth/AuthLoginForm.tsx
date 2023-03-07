@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Button, Card } from 'react-native-paper';
-import { EmailInput, PasswordInput } from '@src/components';
+import { EmailInput, PasswordInput } from 'rn-sak';
 import { useLogin } from '@src/services/countries.graphql';
 
 const AuthLoginForm = () => {

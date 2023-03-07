@@ -1,8 +1,8 @@
 import useSWR, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
+import { client, restMutation, restQuery } from 'rn-sak';
 import { Country, SignInRequestDto, Token, User } from '@src/models';
 import { useAuthStore } from '@src/stores';
-import { client, restMutation, restQuery } from './fetchers';
 
 client.restBaseUrl('https://countries.vinicius.io/api/');
 

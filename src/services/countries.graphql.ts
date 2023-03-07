@@ -1,8 +1,8 @@
 import useSWR, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
+import { client, graphqlMutation, graphqlQuery } from 'rn-sak';
 import { Country, SignInRequestDto, Token, User } from '@src/models';
 import { useAuthStore } from '@src/stores';
-import { client, graphqlMutation, graphqlQuery } from './fetchers';
 
 client.graphqlUrl('https://countries.vinicius.io/graphql');
 
