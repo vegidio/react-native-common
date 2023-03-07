@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { immer } from 'zustand/middleware/immer';
 import { Token } from '@src/models';
-import { clearCache, config } from '@src/services/fetchers';
+import { client } from '@src/services/fetchers';
 
 interface AuthStore {
     token?: Token;
@@ -18,8 +18,8 @@ export const useAuthStore = create(
         },
 
         logout() {
-            delete config.headers.Authorization;
-            clearCache();
+            delete client.headers.Authorization;
+            client.clearCache();
 
             set(state => {
                 state.token = undefined;

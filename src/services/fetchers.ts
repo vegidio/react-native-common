@@ -6,75 +6,79 @@ type Headers = {
     [key: string]: string | number | boolean;
 };
 
-type FetcherConfig = {
+type ClientConfig = {
     axiosClient?: AxiosInstance;
     graphqlClient?: GraphQLClient;
     headers: Headers;
     restBaseUrl: (baseUrl: string) => void;
     graphqlUrl: (url: string) => void;
+    clearCache: () => void;
 };
 
 /**
- * Call either `config.restBaseUrl()` or `config.graphqlUrl()` depending on the API that you want to use.
+ * Call either `client.restBaseUrl()` or `client.graphqlUrl()` depending on the API that you want to use.
  */
-export const config: FetcherConfig = {
+export const client: ClientConfig = {
     headers: {},
 
-    restBaseUrl(baseUrl: string) {
+    restBaseUrl(baseUrl: string, timeout: number = 5000) {
         this.axiosClient = axios.create({
             baseURL: baseUrl,
-            timeout: 5000,
+            timeout,
         });
     },
 
     graphqlUrl(url) {
         this.graphqlClient = new GraphQLClient(url);
     },
-};
 
-export const clearCache = () => {
-    mutate(() => true, undefined, { revalidate: false });
+    clearCache() {
+        mutate(() => true, undefined, { revalidate: false });
+    },
 };
 
 // region - REST
-export const restQuery = ([method, url, data, paramHeaders]: [Method, string, any?, Headers?]): Promise<any> => {
-    if (!config.axiosClient) {
-        throw Error('You must call config.restBaseUrl() before using restQuery');
+type RestQParams = [Method, string, any?, Headers?];
+type RestMParams = [string, string, Headers?];
+
+export const restQuery = ([method, url, data, paramHeaders]: RestQParams): Promise<any> => {
+    if (!client.axiosClient) {
+        throw Error('You must call client.restBaseUrl() before using restQuery');
     }
 
-    const mergedHeaders = { ...config.headers, ...paramHeaders };
-    return config.axiosClient.request({ method, url, data, headers: mergedHeaders }).then(res => res.data.data);
+    const headers = { ...client.headers, ...paramHeaders };
+    return client.axiosClient.request({ method, url, data, headers }).then(res => res.data.data);
 };
 
-export const restMutation = (
-    [method, url, paramHeaders]: [string, string, Headers?],
-    { arg: data }: any,
-): Promise<any> => {
-    if (!config.axiosClient) {
-        throw Error('You must call config.restBaseUrl() before using restMutation');
+export const restMutation = ([method, url, paramHeaders]: RestMParams, { arg: data }: any): Promise<any> => {
+    if (!client.axiosClient) {
+        throw Error('You must call client.restBaseUrl() before using restMutation');
     }
 
-    const mergedHeaders = { ...config.headers, ...paramHeaders };
-    return config.axiosClient.request({ method, url, data, headers: mergedHeaders }).then(res => res.data.data);
+    const headers = { ...client.headers, ...paramHeaders };
+    return client.axiosClient.request({ method, url, data, headers }).then(res => res.data.data);
 };
 // endregion
 
 // region - GraphQL
-export const graphqlQuery = ([query, variables, paramHeaders]: [string, any?, Headers?]): Promise<any> => {
-    if (!config.graphqlClient) {
-        throw Error('You must call config.graphqlUrl() before using graphqlQuery');
+type GraphqlQParams = [string, any?, Headers?];
+type GraphqlMParams = [string, Headers?];
+
+export const graphqlQuery = ([query, variables, paramHeaders]: GraphqlQParams): Promise<any> => {
+    if (!client.graphqlClient) {
+        throw Error('You must call client.graphqlUrl() before using graphqlQuery');
     }
 
-    const mergedHeaders = { ...config.headers, ...paramHeaders } as any;
-    return config.graphqlClient.request<any>(query, variables, mergedHeaders).then(res => Object.values(res)[0]);
+    const headers = { ...client.headers, ...paramHeaders } as any;
+    return client.graphqlClient.request<any>(query, variables, headers).then(res => Object.values(res)[0]);
 };
 
-export const graphqlMutation = ([query, paramHeaders]: [string, Headers?], { arg: variables }: any): Promise<any> => {
-    if (!config.graphqlClient) {
-        throw Error('You must call config.graphqlUrl() before using graphqlMutation');
+export const graphqlMutation = ([query, paramHeaders]: GraphqlMParams, { arg: variables }: any): Promise<any> => {
+    if (!client.graphqlClient) {
+        throw Error('You must call client.graphqlUrl() before using graphqlMutation');
     }
 
-    const mergedHeaders = { ...config.headers, ...paramHeaders } as any;
-    return config.graphqlClient.request<any>(query, variables, mergedHeaders).then(res => Object.values(res)[0]);
+    const headers = { ...client.headers, ...paramHeaders } as any;
+    return client.graphqlClient.request<any>(query, variables, headers).then(res => Object.values(res)[0]);
 };
 // endregion

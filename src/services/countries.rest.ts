@@ -2,9 +2,9 @@ import useSWR, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
 import { Country, SignInRequestDto, Token, User } from '@src/models';
 import { useAuthStore } from '@src/stores';
-import { config, restMutation, restQuery } from './fetchers';
+import { client, restMutation, restQuery } from './fetchers';
 
-config.restBaseUrl('https://countries.vinicius.io/api/');
+client.restBaseUrl('https://countries.vinicius.io/api/');
 
 export const useLogin = (): SWRMutationResponse<Token, any, SignInRequestDto> => {
     const setToken = useAuthStore(state => state.setToken);
@@ -12,7 +12,7 @@ export const useLogin = (): SWRMutationResponse<Token, any, SignInRequestDto> =>
     return useSWRMutation(['POST', 'v1/auth/signin'], restMutation, {
         onSuccess: (data: Token) => {
             setToken(data);
-            config.headers.Authorization = `Bearer ${data.accessToken}`;
+            client.headers.Authorization = `Bearer ${data.accessToken}`;
         },
     });
 };

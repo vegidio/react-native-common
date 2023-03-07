@@ -2,9 +2,9 @@ import useSWR, { SWRResponse } from 'swr';
 import useSWRMutation, { SWRMutationResponse } from 'swr/mutation';
 import { Country, SignInRequestDto, Token, User } from '@src/models';
 import { useAuthStore } from '@src/stores';
-import { config, graphqlMutation, graphqlQuery } from './fetchers';
+import { client, graphqlMutation, graphqlQuery } from './fetchers';
 
-config.graphqlUrl('https://countries.vinicius.io/graphql');
+client.graphqlUrl('https://countries.vinicius.io/graphql');
 
 export const useLogin = (): SWRMutationResponse<Token, any, SignInRequestDto> => {
     const setToken = useAuthStore(state => state.setToken);
@@ -21,7 +21,7 @@ export const useLogin = (): SWRMutationResponse<Token, any, SignInRequestDto> =>
     return useSWRMutation([query], graphqlMutation, {
         onSuccess: (data: Token) => {
             setToken(data);
-            config.headers.Authorization = `Bearer ${data.accessToken}`;
+            client.headers.Authorization = `Bearer ${data.accessToken}`;
         },
     });
 };
